@@ -23,9 +23,7 @@ public class Cargo {
     private Integer codigo;
     @Column(length = 50, nullable = false, unique = true)
     private String descricao;
-    //@OneToMany
-    //@JoinColumn(nullable = false)
-    //private FuncionarioCargo funcionarioCargo;
+
 
     /**
      * @return the codigo

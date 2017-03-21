@@ -15,7 +15,7 @@ import Repositorios.CargoRepositorio;
 public class CargoRepositorioTesteBuscar {
     public static void main(String[] args) {
      CargoRepositorio cargoRepositorio = new CargoRepositorio();
-     Cargo cargo = cargoRepositorio.buscarPorCodigo(1);
+     Cargo cargo = cargoRepositorio.buscarPorCodigo(2);
      System.out.println("Cargo encontrado:");
      System.out.println("Codigo: "+cargo.getCodigo());
      System.out.println("Descrição: " +cargo.getDescricao());

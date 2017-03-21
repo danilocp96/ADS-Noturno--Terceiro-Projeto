@@ -15,7 +15,7 @@ import Repositorios.CargoRepositorio;
 public class CargoRepositorioTesteIncluir {
     public static void main(String[] args) {
         Cargo cargo = new Cargo();
-        cargo.setDescricao("Vendedor");
+        cargo.setDescricao("Vendedorea");
         CargoRepositorio cargoRepositorio = new CargoRepositorio();
         cargoRepositorio.inserir(cargo);
         System.out.println("Cargo inserido com sucesso!");

@@ -10,16 +10,17 @@ import Repositorios.CategoriaRepositorio;
 
 /**
  *
- * @author Alan
+ * @author Danilo Cardoso
  */
 public class CategoriaRepositorioTesteEditar {
     public static void main(String[] args) {
      CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio();
      Categoria categoria = categoriaRepositorio.buscarPorCodigo(1);
-     System.out.println("Categoria encontrado:");
+     System.out.println("Categoria encontrada:");
      System.out.println("Codigo: "+categoria.getCodigo());
      System.out.println("Descrição: " +categoria.getDescricao());
-     categoria.setDescricao("OutroProduto");
+     categoria.setDescricao("Bebidas");
      categoriaRepositorio.editar(categoria);
+        System.out.println("Editada com sucesso");
      }
 }

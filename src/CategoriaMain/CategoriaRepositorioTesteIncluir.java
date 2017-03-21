@@ -4,20 +4,19 @@
  * and open the template in the editor.
  */
 package CategoriaMain;
-
 import Entidades.Categoria;
 import Repositorios.CategoriaRepositorio;
 
 /**
  *
- * @author Alan
+ * @author Danilo Cardoso
  */
 public class CategoriaRepositorioTesteIncluir {
-   public static void main(String[] args) {
+    public static void main(String[] args) {
         Categoria categoria = new Categoria();
-        categoria.setDescricao("Produto");
+        categoria.setDescricao("Produtos d");
         CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio();
         categoriaRepositorio.inserir(categoria);
-        System.out.println("Categoria inserido com sucesso!");
-    } 
+        System.out.println("Categoria inserida com sucesso!");
+    }
 }

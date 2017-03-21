@@ -21,5 +21,6 @@ public class CargoRepositorioTesteEditar {
      System.out.println("Descrição: " +cargo.getDescricao());
      cargo.setDescricao("Encaixotador");
      cargoRepositorio.editar(cargo);
+        System.out.println("Editado");
      }
 }

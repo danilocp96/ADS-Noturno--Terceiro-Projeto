@@ -14,7 +14,7 @@ import Repositorios.CategoriaRepositorio;
 public class CategoriaRepositorioTesteIncluir {
     public static void main(String[] args) {
         Categoria categoria = new Categoria();
-        categoria.setDescricao("Produtos de limpeza");
+        categoria.setDescricao("Produtos d");
         CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio();
         categoriaRepositorio.inserir(categoria);
         System.out.println("Categoria inserida com sucesso!");

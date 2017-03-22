@@ -21,8 +21,8 @@ public class VendaRepositorioTestBuscar {
         
         System.out.println("Venda Encontrada");
         System.out.println("Codigo: " + venda.getCodigo());
-        System.out.println("Cidade: " + venda.getDatatempo());
-        System.out.println("Estado: " + venda.getTotal());
+        System.out.println("Data: " + venda.getDatatempo());
+        System.out.println("Total: " + venda.getTotal());
         System.out.println("Funcionario: " + venda.getFuncionario().getPessoa().getNome());
     }
 }

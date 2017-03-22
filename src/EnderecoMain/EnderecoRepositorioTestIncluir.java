@@ -17,7 +17,7 @@ import Repositorios.PessoaRepositorio;
 public class EnderecoRepositorioTestIncluir {
     public static void main(String[] args) {
         Endereco endereco = new Endereco();
-        
+        EnderecoRepositorio enderecoRepositorio = new EnderecoRepositorio();
         PessoaRepositorio pessoaRepositorio = new PessoaRepositorio();
         Pessoa pessoa = pessoaRepositorio.buscarPorCodigo(1);
         
@@ -28,7 +28,6 @@ public class EnderecoRepositorioTestIncluir {
         endereco.setEstado("São Paulo");
         endereco.setPessoa(pessoa);
         endereco.setComplemento("Apartamento");
-        EnderecoRepositorio enderecoRepositorio = new EnderecoRepositorio();
         enderecoRepositorio.inserir(endereco);
         System.out.println("Endereco inserida com sucesso!");
     }

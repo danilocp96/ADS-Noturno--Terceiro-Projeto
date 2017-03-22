@@ -15,10 +15,10 @@ import Repositorios.PessoaRepositorio;
 public class PessoaRepositorioTesteIncluir {
     public static void main(String[] args) {
         Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Joaozin Beira mar");
-        pessoa.setCpf("111.555.777");
+        pessoa.setNome("Maria teste");
+        pessoa.setCpf("433.697.464");
         PessoaRepositorio pessoaRepositorio = new PessoaRepositorio();
         pessoaRepositorio.inserir(pessoa);
-        System.out.println("Pessoa inserido com sucesso!");
+        System.out.println("Pessoa inserida com sucesso!");
     }
 }

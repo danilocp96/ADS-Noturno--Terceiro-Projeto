@@ -27,12 +27,13 @@ public class FuncionarioCargoRepositorioTesteIncluir {
         Cargo cargo = cargoRepositorio.buscarPorCodigo(1);
         
         
-        funcionarioCargo.setAdmissao();
-        funcionarioCargo.setDemissao();
+        funcionarioCargo.setAdmissao(new Date(117, 01, 11, 23, 00,58));
+        funcionarioCargo.setDemissao(new Date(117, 01, 11, 23, 00,59));
         funcionarioCargo.setSalario(1588.00f);
         funcionarioCargo.setFuncionario(funcionario);
         funcionarioCargo.setCargo(cargo);
         funcionarioCargoRepositorio.inserir(funcionarioCargo);
+        System.out.println("FuncionarioCargo Registrado");
         
     }
 }

@@ -15,7 +15,7 @@ import Repositorios.FuncionarioCargoRepositorio;
 public class FuncionarioCargoRepositorioTesteBuscar {
     public static void main(String[] args) {
         FuncionarioCargoRepositorio funcionarioCargoRepositorio = new FuncionarioCargoRepositorio();
-        FuncionarioCargo funcionarioCargo = funcionarioCargoRepositorio.buscarPorCodigo(2);
+        FuncionarioCargo funcionarioCargo = funcionarioCargoRepositorio.buscarPorCodigo(5);
         System.out.println("Funcionario encontrado:");
         System.out.println("Codigo: "+funcionarioCargo.getCodigo());
         System.out.println("Admissao: " +funcionarioCargo.getAdmissao());

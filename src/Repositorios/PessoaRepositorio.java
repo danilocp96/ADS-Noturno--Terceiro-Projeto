@@ -5,8 +5,12 @@
  */
 package Repositorios;
 import Entidades.Pessoa;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -39,5 +43,46 @@ public void editar(Pessoa pessoa){
         sessao.update(pessoa);
         transacao.commit();
         sessao.close();
+    }
+
+public List<Pessoa> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Pessoa.class);
+    
+    criterio.addOrder(Order.asc("nome"));
+    
+    List<Pessoa> pessoas = criterio.list();
+    sessao.close();    
+    return pessoas;
+    }
+    
+    public List<Pessoa> buscarPorNome(String nome){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Pessoa.class);
+    
+    criterio.add(Restrictions.eq("nome", nome));
+    
+    criterio.addOrder(Order.asc("nome"));
+    
+    List<Pessoa> pessoas = criterio.list();
+    sessao.close();    
+    return pessoas; 
+    }
+    
+    public List<Pessoa> buscarPorNomeCPF(String nome, String cpf){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Pessoa.class);
+    
+    criterio.add(Restrictions.eq("nome", nome));
+    criterio.add(Restrictions.eq("cpf", cpf));
+    
+    criterio.addOrder(Order.asc("nome"));
+    
+    List<Pessoa> pessoas = criterio.list();
+    sessao.close();    
+    return pessoas; 
     }
 }

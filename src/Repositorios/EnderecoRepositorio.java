@@ -5,8 +5,13 @@
  */
 package Repositorios;
 import Entidades.Endereco;
+import Entidades.Endereco;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -39,5 +44,46 @@ public void editar(Endereco endereco){
         sessao.update(endereco);
         transacao.commit();
         sessao.close();
+    }
+
+public List<Endereco> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Endereco.class);
+    
+    criterio.addOrder(Order.asc("estado"));
+    
+    List<Endereco> enderecos = criterio.list();
+    sessao.close();    
+    return enderecos;
+    }
+    
+    public List<Endereco> buscarPorPessoaCod(String pessoaCod){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Endereco.class);
+    
+    criterio.add(Restrictions.eq("pessoa_codigo", pessoaCod));
+    
+    criterio.addOrder(Order.asc("estado"));
+    
+    List<Endereco> enderecos = criterio.list();
+    sessao.close();    
+    return enderecos; 
+    }
+    
+    public List<Endereco> buscarPorEstadoCidade(String estado, String cidade){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Endereco.class);
+    
+    criterio.add(Restrictions.eq("estado", estado));
+    criterio.add(Restrictions.eq("cidade", cidade));
+    
+    criterio.addOrder(Order.asc("bairro"));
+    
+    List<Endereco> enderecos = criterio.list();
+    sessao.close();    
+    return enderecos; 
     }
 }

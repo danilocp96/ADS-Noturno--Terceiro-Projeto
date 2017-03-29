@@ -6,8 +6,13 @@
 package Repositorios;
 
 import Entidades.Cargo;
+import Entidades.Cargo;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -40,5 +45,46 @@ public void editar(Cargo cargo){
         sessao.update(cargo);
         transacao.commit();
         sessao.close();
+    }
+
+public List<Cargo> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Cargo.class);
+    
+    criterio.addOrder(Order.asc("descricao"));
+    
+    List<Cargo> cargos = criterio.list();
+    sessao.close();    
+    return cargos;
+    }
+    
+    public List<Cargo> buscarPorDescricao(String descricao){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Cargo.class);
+    
+    criterio.add(Restrictions.eq("descricao", descricao));
+    
+    criterio.addOrder(Order.asc("descricao"));
+    
+    List<Cargo> cargos = criterio.list();
+    sessao.close();    
+    return cargos; 
+    }
+    
+    public List<Cargo> buscarPorDescricaoCod(String descricao, String codigo){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Cargo.class);
+    
+    criterio.add(Restrictions.eq("descricao", descricao));
+    criterio.add(Restrictions.eq("codigo", codigo));
+    
+    criterio.addOrder(Order.asc("descricao"));
+    
+    List<Cargo> cargos = criterio.list();
+    sessao.close();    
+    return cargos; 
     }
 }

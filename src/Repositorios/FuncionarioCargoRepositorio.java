@@ -6,8 +6,13 @@
 package Repositorios;
 
 import Entidades.FuncionarioCargo;
+import Entidades.FuncionarioCargo;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -40,5 +45,46 @@ public void editar(FuncionarioCargo funcionarioFuncionarioCargo){
         sessao.update(funcionarioFuncionarioCargo);
         transacao.commit();
         sessao.close();
+    }
+
+public List<FuncionarioCargo> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(FuncionarioCargo.class);
+    
+    criterio.addOrder(Order.asc("salario"));
+    
+    List<FuncionarioCargo> funcionarioCargos = criterio.list();
+    sessao.close();    
+    return funcionarioCargos;
+    }
+    
+    public List<FuncionarioCargo> buscarPorSalario(String salario){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(FuncionarioCargo.class);
+    
+    criterio.add(Restrictions.ge("salario", salario));
+    
+    criterio.addOrder(Order.asc("salario"));
+    
+    List<FuncionarioCargo> funcionarioCargos = criterio.list();
+    sessao.close();    
+    return funcionarioCargos; 
+    }
+    
+    public List<FuncionarioCargo> buscarPorCargoCodSalario(String cargoCod, String salario){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(FuncionarioCargo.class);
+    
+    criterio.add(Restrictions.eq("cargo_codigo", cargoCod));
+    criterio.add(Restrictions.ge("salario", salario));
+    
+    criterio.addOrder(Order.asc("salario"));
+    
+    List<FuncionarioCargo> funcionarioCargos = criterio.list();
+    sessao.close();    
+    return funcionarioCargos; 
     }
 }

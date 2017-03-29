@@ -5,8 +5,13 @@
  */
 package Repositorios;
 import Entidades.Telefone;
+import Entidades.Telefone;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -39,5 +44,46 @@ public void editar(Telefone telefone){
         sessao.update(telefone);
         transacao.commit();
         sessao.close();
+    }
+
+public List<Telefone> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Telefone.class);
+    
+    criterio.addOrder(Order.asc("ddd"));
+    
+    List<Telefone> telefones = criterio.list();
+    sessao.close();    
+    return telefones;
+    }
+    
+    public List<Telefone> buscarPorPessoaCod(String pessoaCod){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Telefone.class);
+    
+    criterio.add(Restrictions.eq("pessoa_codigo", pessoaCod));
+    
+    criterio.addOrder(Order.asc("pessoa_codigo"));
+    
+    List<Telefone> telefones = criterio.list();
+    sessao.close();    
+    return telefones; 
+    }
+    
+    public List<Telefone> buscarPorDddPcod(String ddd, String pessoaCod){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Telefone.class);
+    
+    criterio.add(Restrictions.eq("pessoa_codigo", pessoaCod));
+    criterio.add(Restrictions.eq("ddd", ddd));
+    
+    criterio.addOrder(Order.asc("descricao"));
+    
+    List<Telefone> telefones = criterio.list();
+    sessao.close();    
+    return telefones; 
     }
 }

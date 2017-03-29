@@ -6,8 +6,13 @@
 package Repositorios;
 
 import Entidades.Funcionario;
+import Entidades.Funcionario;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -40,5 +45,46 @@ public void editar(Funcionario funcionario){
         sessao.update(funcionario);
         transacao.commit();
         sessao.close();
+    }
+
+public List<Funcionario> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Funcionario.class);
+    
+    criterio.addOrder(Order.asc("pis"));
+    
+    List<Funcionario> funcionarios = criterio.list();
+    sessao.close();    
+    return funcionarios;
+    }
+    
+    public List<Funcionario> buscarPorPis(String pis){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Funcionario.class);
+    
+    criterio.add(Restrictions.eq("pis", pis));
+    
+    criterio.addOrder(Order.asc("pis"));
+    
+    List<Funcionario> funcionarios = criterio.list();
+    sessao.close();    
+    return funcionarios; 
+    }
+    
+    public List<Funcionario> buscarPorPisCt(String pis, String ct){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Funcionario.class);
+    
+    criterio.add(Restrictions.eq("pis", pis));
+    criterio.add(Restrictions.eq("carteiraDeTrabalho", ct));
+    
+    criterio.addOrder(Order.asc("descricao"));
+    
+    List<Funcionario> funcionarios = criterio.list();
+    sessao.close();    
+    return funcionarios; 
     }
 }

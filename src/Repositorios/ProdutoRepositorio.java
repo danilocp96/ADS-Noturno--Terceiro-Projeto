@@ -5,8 +5,13 @@
  */
 package Repositorios;
 import Entidades.Produto;
+import Entidades.Produto;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -39,5 +44,46 @@ public void editar(Produto produto){
         sessao.update(produto);
         transacao.commit();
         sessao.close();
+    }
+
+public List<Produto> buscarTudoOrdenado(){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Produto.class);
+    
+    criterio.addOrder(Order.asc("descricao"));
+    
+    List<Produto> produtos = criterio.list();
+    sessao.close();    
+    return produtos;
+    }
+    
+    public List<Produto> buscarPorQuantidade(String quantidade){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Produto.class);
+    
+    criterio.add(Restrictions.ge("quantidade", quantidade));
+    
+    criterio.addOrder(Order.asc("quantidade"));
+    
+    List<Produto> produtos = criterio.list();
+    sessao.close();    
+    return produtos; 
+    }
+    
+    public List<Produto> buscarPorQtdPreco(String quantidade, String preco){
+    Session sessao = Hibernate.NewHibernateUtil.getSessionFactory().openSession();
+    
+    Criteria criterio = sessao.createCriteria(Produto.class);
+    
+    criterio.add(Restrictions.ge("quantidade", quantidade));
+    criterio.add(Restrictions.ge("preco", preco));
+    
+    criterio.addOrder(Order.asc("quantidade"));
+    
+    List<Produto> produtos = criterio.list();
+    sessao.close();    
+    return produtos; 
     }
 }
